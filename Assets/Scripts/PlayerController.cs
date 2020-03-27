@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             targetPos = new Vector2(transform.position.x, transform.position.y - change);
         }
 
-        if (Health == 0)
+        if (Health == 0) //Reloads scene when health = 0
         {
             Destroy(gameObject);
             SceneManager.LoadScene(0);

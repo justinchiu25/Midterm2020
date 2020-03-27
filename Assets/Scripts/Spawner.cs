@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         Timer -= Time.deltaTime;
-        if (Timer <= 0)
+        if (Timer <= 0) //Instantiate when timer is 0
         {
             rSpawn = Random.Range(0, 3);
             lSpawn = Random.Range(0, 3);
@@ -59,7 +59,7 @@ public class Spawner : MonoBehaviour
                 Instantiate(enemy, spawn3.transform.position, Quaternion.identity); 
             }
 
-            if (spawnTimer > 1)
+            if (spawnTimer > 1) //Increases spawn timer
             {
                 spawnTimer -= spawnInc;
             }
