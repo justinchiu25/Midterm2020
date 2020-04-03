@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
         if (gameObject.transform.position.x < xPos)    
         {
             Destroy(GameObject.Find("Enemy(Clone)"));
+            Destroy(GameObject.Find("Powerup(Clone)"));
             score++;
         }
         
@@ -33,13 +34,21 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+   /* private void OnTriggerEnter2D(Collider2D other)
     {
        if (other.gameObject.CompareTag("Player"))
        {
-           other.GetComponent<PlayerController>().Health--;
-           Debug.Log("Destroyed");
-           Debug.Log( other.GetComponent<PlayerController>().Health);
+           if (other.GetComponent<PlayerController>().isInvuln == false)
+           {
+               other.GetComponent<PlayerController>().Health--;
+               Debug.Log("Destroyed");
+               Debug.Log(other.GetComponent<PlayerController>().Health);
+           }
+           else
+           {
+               
+           }
+           
        }
-    }
+    }*/
 }

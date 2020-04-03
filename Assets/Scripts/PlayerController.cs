@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public int Health;
     private Vector2 targetPos;
     public TMP_Text healthText;
+
+    public bool isInvuln = false;
+    public float invulnTimer;
     
     // Start is called before the first frame update
     void Start()
@@ -34,12 +37,45 @@ public class PlayerController : MonoBehaviour
             targetPos = new Vector2(transform.position.x, transform.position.y - change);
         }
 
-        if (Health == 0) //Reloads scene when health = 0
+        if (Health <= 0) //Reloads scene when health = 0
         {
             Destroy(gameObject);
             SceneManager.LoadScene(0);
         }
 
         healthText.text = "Health: " + Health;
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PowerUp"))
+        {
+            Destroy(other.gameObject);
+            isInvuln = true;
+            Debug.Log(isInvuln);
+            Invuln(5);
+            isInvuln = false;
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (isInvuln == false)
+            {
+                Health--;
+                Destroy(other.gameObject);
+                Debug.Log("Destroyed");
+                Debug.Log(Health);
+            }
+            else if (isInvuln)
+            {
+                Health -= 0;
+            }
+           
+        }
+    }
+    
+
+    private IEnumerator Invuln(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
     }
 }
